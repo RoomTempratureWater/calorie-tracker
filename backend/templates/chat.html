@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+    <script src="/static/script.js" defer></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        #chat-box { border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: auto; margin-bottom: 10px; }
+        .user { color: blue; }
+        .bot { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Simple Chat</h1>
+    <div id="chat-box"></div>
+    <form id="chat-form">
+        <input type="text" id="message-input" name="message" autocomplete="off" required>
+        <button type="submit">Send</button>
+    </form>
+</body>
+</html>
+
