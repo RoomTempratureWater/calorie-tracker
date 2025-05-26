@@ -1,4 +1,20 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Calorie Tracker UI
+
+A modern frontend for tracking daily calorie intake and fitness insights. Built using **Next.js** with TypeScript and Tailwind CSS.
+
+---
+
+## 🧠 Features
+
+- 🗨️ **Chat Page** – Interact with an AI fitness assistant to log meals and get suggestions.
+- 📋 **Logs Page** – View and manage your meal logs for the day.
+- 📊 **Analytics Page** – Get daily and weekly nutritional summaries and macro breakdowns.
+
+---
+
+## Rough Diagram
+
+![image](https://github.com/user-attachments/assets/c81c6ab4-d3ef-4eab-be02-697e4d0b88ca)
 
 ## Getting Started
 
