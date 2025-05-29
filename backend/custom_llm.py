@@ -28,13 +28,18 @@ class HuggingFaceChatLLM(BaseChatModel):
             hf_msgs.append({"role": role, "content": msg.content})
         return hf_msgs
 
+
     def _generate(self, messages: List, stop=None) -> ChatResult:
         hf_messages = self._convert_messages(messages)
+
+        if stop is None:
+            stop = ["Observation:", "Final Answer:"]
 
         completion = self.client.chat.completions.create(
             model=self.model,
             messages=hf_messages,
-            temperature=self.temperature
+            temperature=self.temperature,
+            stop=stop 
         )
 
         ai_message = AIMessage(content=completion.choices[0].message.content)

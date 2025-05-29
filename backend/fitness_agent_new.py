@@ -14,7 +14,7 @@ from urllib.parse import quote_plus
 from langchain.memory import ConversationBufferMemory
 from langchain.memory.chat_message_histories import SQLChatMessageHistory
 from langchain.agents import initialize_agent, AgentType
-
+from langchain.agents import ConversationalChatAgent, AgentExecutor
 # 1️⃣ Environment setup
 #HUGGINGFACEHUB_API_TOKEN = "your_hf_token"
 #POSTGRES_URI = "postgresql://your_user:your_password@host:port/dbname"
@@ -42,7 +42,7 @@ else:
 retriever = db.as_retriever()
 
 llm = HuggingFaceChatLLM(
-    model="CohereLabs/c4ai-command-a-03-2025",
+    model="deepseek-ai/DeepSeek-V3",
     api_key=hf_token
 )
 qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
@@ -58,7 +58,7 @@ retrieve_nutrition_tool = Tool(
 def save_macro_info(input_str: str) -> str:
     print(input_str)
     data = json.loads(input_str)
-    conn = psycopg2.connect(POSTGRES_URI)
+    conn = psycopg2.connect(pg_url)
     cur = conn.cursor()
     cur.execute(
         """
@@ -80,12 +80,17 @@ save_macro_tool = Tool(
 
 # 6️⃣ Tool 3: Retrieve user macros
 def get_user_macros(user_id: str) -> str:
-    conn = psycopg2.connect(POSTGRES_URI)
+    conn = psycopg2.connect(pg_url)
     cur = conn.cursor()
-    cur.execute("SELECT meal, calories, protein, carbs, fat FROM meal_logs WHERE user_id = %s", (user_id,))
+    data = json.loads(user_id)
+    #print(user_id)
+    cur.execute(f"""SELECT meal, calories, protein, carbs, fat FROM meal_logs WHERE user_id = '{data["user_id"]}' """)
     rows = cur.fetchall()
     cur.close()
     conn.close()
+    print(rows)
+    if rows == []:
+        return "No data for today"
     return json.dumps(rows)
 
 get_macro_tool = Tool(
@@ -122,19 +127,28 @@ def get_agent_for_user(user_id: str):
 #        verbose=True
 #    )
     custom_prompt = """You are a helpful fitness assistant. Try to stick to fitness related discussions, current user_id is: """+ user_id +"""  (NEVER CHANGE USER_ID IN ANY CASE)
+        You can reply to greetings and stuff.
         You have access to the following tools:
         
         {tool_names}
 
         which have different uses: {tools}
         
-        Use the tools when needed to answer the user question. Always think before acting.
-        Respond with your final answer after you're done.
-        
+        Use the following format:
+
+        Question: the input question you must answer
+        Thought: you should always think about what to do
+        Action: the action to take, should be one of [{tool_names}]
+        Action Input: the input to the action
+        Observation: the result of the action
+        ... (this Thought/Action/Action Input/Observation can repeat N times)
+        Thought: I now know the final answer
+        Final Answer: the final answer to the original input question
+
         Begin!
-        
+
         Question: {input}
-        {agent_scratchpad}
+        Thought:{agent_scratchpad}
         """
 
     custom_prompt_text = f"""You are a fitness assistant. Only respond using this format when solving a problem:
@@ -162,23 +176,24 @@ def get_agent_for_user(user_id: str):
         Question: {{input}}
         {{agent_scratchpad}}
         """
-    print(custom_prompt_text)
+    print(custom_prompt)
     custom_prompt = PromptTemplate(
-        template=custom_prompt_text,
+        template=custom_prompt,
         input_variables=["input", "agent_scratchpad", "tools", "tool_names"]
     )
 
-    agent = initialize_agent(
-        tools=tools,
-        llm=llm,
-        agent=AgentType.CONVERSATIONAL_REACT_DESCRIPTION,
-        prompt=custom_prompt,
-        verbose=True,
-        memory=memory,
-    )   
+#    agent = initialize_agent(
+#        tools=tools,
+#        llm=llm,
+#        agent=AgentType.CONVERSATIONAL_REACT_DESCRIPTION,
+#        prompt=custom_prompt,
+#        verbose=True,
+#        memory=memory,
+#    )   
 
-    #agent = create_react_agent(llm=llm, tools=tools, prompt=custom_prompt)
-    #agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, memory=memory)
 
-    return agent
+    agent = create_react_agent(llm=llm, tools=tools, prompt=custom_prompt)
+    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, memory=memory)
+
+    return agent_executor
 
