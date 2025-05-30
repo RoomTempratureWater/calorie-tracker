@@ -128,6 +128,7 @@ def get_agent_for_user(user_id: str):
 #    )
     custom_prompt = """You are a helpful fitness assistant. Try to stick to fitness related discussions, current user_id is: """+ user_id +"""  (NEVER CHANGE USER_ID IN ANY CASE)
         You can reply to greetings and stuff.
+        note: if you can't retrieve data from GetNutritionInfo, don't retry more than 2 times, get macro details from your memory 
         You have access to the following tools:
         
         {tool_names}

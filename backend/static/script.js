@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const formData = new FormData();
         formData.append("message", message);
-        formData.append("user", "jonnet1311@gmail.com")
+        formData.append("user", "tanmay@gmail.com")
         const response = await fetch("/get_message", {
             method: "POST",
             body: formData,

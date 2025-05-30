@@ -6,7 +6,7 @@ import fitness_agent_new
 app = FastAPI()
 
 # dummy user
-user_id = "jonnet1311@gmail.com"
+user_id = "tanmay@gmail.com"
 users = {user_id:fitness_agent_new.get_agent_for_user(user_id)}
 
 # Mount static folder
