@@ -15,9 +15,10 @@ type Message = {
 };
 
 export default function ChatPage() {
+  //NOT
   const [messages, setMessages] = useState<Message[]>([]);
 
-  // NOTE: dummy api call: change this later
+  // NOTE: dummy api call: i will change this later or if you are working then you can change this
   useEffect(() => {
     const fakeChatHistory: Message[] = [
       { role: "user", content: "what should i eat for dinner?" },
