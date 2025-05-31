@@ -3,6 +3,8 @@
 
 import { TrendingUp } from "lucide-react"
 import { Pie, PieChart } from "recharts"
+import Logs from "@/components/logs";
+import { fetchWithDebounce } from "@/lib/debounce";
 
 import {
   Card,
@@ -19,45 +21,36 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 
-export const description = "A donut chart"
-
+export const description = "Dashboard with logs and charts"
+  // NOTE: aditya -> if youre working on this, use fetchWithDebounce method to call the api while chaning this dummy api call
 const chartData = [
-  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-  { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
-  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-  { browser: "other", visitors: 90, fill: "var(--color-other)" },
+  { macro: "protien", grams: 50, fill: "var(--color-protien)" },
+  { macro: "carbs", grams: 200, fill: "var(--color-carbs)" },
+  { macro: "fats", grams: 187, fill: "var(--color-fats)" },
 ]
 
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
+  grams: {
+    label: "grams",
   },
-  chrome: {
-    label: "Chrome",
-    color: "var(--chart-1)",
-  },
-  safari: {
-    label: "Safari",
+  carbs: {
+    label: "carbs",
     color: "var(--chart-2)",
   },
-  firefox: {
-    label: "Firefox",
+  fats: {
+    label: "fats",
     color: "var(--chart-3)",
   },
-  edge: {
-    label: "Edge",
+  protien: {
+    label: "protien",
     color: "var(--chart-4)",
-  },
-  other: {
-    label: "Other",
-    color: "var(--chart-5)",
   },
 } satisfies ChartConfig
 
 export default function AnalyticsPage() {
   return (
-    <Card className="flex flex-col">
+    <div>
+    <Card className="flex flex-col justify-start bg-[var(--sidebar)] text-[var(--sidebar-foreground)]">
       <CardHeader className="items-center pb-0">
         <CardTitle>Pie Chart - Donut</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
@@ -74,8 +67,8 @@ export default function AnalyticsPage() {
             />
             <Pie
               data={chartData}
-              dataKey="visitors"
-              nameKey="browser"
+              dataKey="grams"
+              nameKey="macro"
               innerRadius={60}
             />
           </PieChart>
@@ -86,9 +79,13 @@ export default function AnalyticsPage() {
           Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
         </div>
         <div className="text-muted-foreground leading-none">
-          Showing total visitors for the last 6 months
+          Showing total grams for the last 6 months
         </div>
       </CardFooter>
-    </Card>
+      </Card>
+      <Card>
+        <Logs/>
+      </Card>
+    </div>
   )
 }

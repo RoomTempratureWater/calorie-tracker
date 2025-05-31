@@ -10,12 +10,11 @@ import { Menu } from "lucide-react";
 
 const views = {
   chat: <Chat />,
-  logs: <Logs />,
-  analytics: <Analytics />,
+  dashboard: <Analytics />,
 };
 
 export default function HomePage() {
-  const [view, setView] = useState<"chat" | "logs" | "analytics">("chat");
+  const [view, setView] = useState<"chat" | "analytics">("chat");
 
   const NavButton = ({ label, value }: { label: string; value: typeof view }) => (
     <div
@@ -43,8 +42,7 @@ export default function HomePage() {
           <SheetContent side="left" className="w-48 p-4">
             <div className="flex flex-col items-center justify-center mt-12 space-y-2">
               <NavButton label="Chat" value="chat" />
-              <NavButton label="Logs" value="logs" />
-              <NavButton label="Analytics" value="analytics" />
+              <NavButton label="Dashboard" value="dashboard" />
             </div>
           </SheetContent>
         </Sheet>
@@ -54,8 +52,7 @@ export default function HomePage() {
       <div className="hidden md:flex w-48 border-r p-4 border-[var(--sidebar-border)] bg-[var(--sidebar)] text-[var(--sidebar-foreground)]">
         <div className="flex flex-col items-center justify-center w-full space-y-2 mt-8">
           <NavButton label="Chat" value="chat" />
-          <NavButton label="Logs" value="logs" />
-          <NavButton label="Analytics" value="analytics" />
+          <NavButton label="Dashboard" value="dashboard" />
         </div>
       </div>
 

@@ -9,6 +9,8 @@ import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import MarkdownRenderer from "@/components/markdown";
 import { useRef } from "react";
+import { fetchWithDebounce } from "@/lib/debounce";
+
 type Message = {
   role: "user" | "bot";
   content: string;
@@ -17,6 +19,8 @@ type Message = {
 export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const bottomRef = useRef<HTMLDivElement | null>(null)
+
+  // NOTE: aditya -> if youre working on this, use fetchWithDebounce method to call the api while chaning this dummy api call
   useEffect(() => {
     const fakeChatHistory: Message[] = [
       { role: "You", content: "what should i eat for dinner?" },
