@@ -1,7 +1,23 @@
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+
+/* Emerald Palette — from UI Colors Screenshot */
+:root {
+  --emerald-50: #f1fcf5;
+  --emerald-100: #defaea;
+  --emerald-200: #bef4d5;
+  --emerald-300: #8beab6;
+  --emerald-400: #52d68d;
+  --emerald-500: #33d17a;
+  --emerald-600: #1d9c56;
+  --emerald-700: #1b7a46;
+  --emerald-800: #1a613b;
+  --emerald-900: #175033;
+  --emerald-950: #072c19;
+}
 
 @theme inline {
   --color-background: var(--background);
@@ -43,95 +59,100 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* 🌞 Light Theme */
 :root {
   --radius: 0.625rem;
 
-  /* Custom color palette */
-  --background: #f2e7e5;               /* Light background */
-  --foreground: #516157;               /* Dark text */
-  --primary: #904073;                  /* Main purple */
-  --primary-foreground: #f2e7e5;      /* Light text on primary */
-  --secondary: #a8c7ca;                /* Secondary muted */
-  --secondary-foreground: #3d3236;    /* Dark text for secondary */
-  --accent: #904073;                   /* Accent same as primary */
-  --accent-foreground: #f2e7e5;       /* Light text on accent */
+  --background: var(--emerald-50);
+  --foreground: var(--emerald-900);
 
-  --card: #f2e7e5;
-  --card-foreground: #516157;
-  --popover: #f2e7e5;
-  --popover-foreground: #516157;
+  --primary: var(--emerald-500);
+  --primary-foreground: white;
 
-  --border: #516157;
-  --input: #516157;
-  --ring: #904073;
+  --secondary: var(--emerald-100);
+  --secondary-foreground: var(--emerald-800);
 
-  /* Keep these or adjust as needed */
-  --sidebar: #f2e7e5;
-  --sidebar-foreground: #516157;
-  --sidebar-primary: #904073;
-  --sidebar-primary-foreground: #f2e7e5;
-  --sidebar-accent: #a8c7ca;
-  --sidebar-accent-foreground: #3d3236;
-  --sidebar-border: #516157;
-  --sidebar-ring: #904073;
+  --accent: var(--emerald-300);
+  --accent-foreground: var(--emerald-900);
 
-  /* Chart colors (optional) */
-  --chart-1: #904073;
-  --chart-2: #a8c7ca;
-  --chart-3: #516157;
-  --chart-4: #3d3236;
-  --chart-5: #904073;
+  --card: var(--emerald-100);
+  --card-foreground: var(--emerald-900);
 
-  /* Destructive color (optional) */
-  --destructive: #904073;
+  --popover: var(--emerald-100);
+  --popover-foreground: var(--emerald-900);
+
+  --border: var(--emerald-300);
+  --input: var(--emerald-200);
+  --ring: var(--emerald-500);
+
+  --sidebar: var(--emerald-100);
+  --sidebar-foreground: var(--emerald-900);
+  --sidebar-primary: var(--emerald-500);
+  --sidebar-primary-foreground: white;
+  --sidebar-accent: var(--emerald-200);
+  --sidebar-accent-foreground: var(--emerald-800);
+  --sidebar-border: var(--emerald-300);
+  --sidebar-ring: var(--emerald-500);
+
+  --chart-1: var(--emerald-400);
+  --chart-2: var(--emerald-500);
+  --chart-3: var(--emerald-300);
+  --chart-4: var(--emerald-600);
+  --chart-5: var(--emerald-900);
+
+  --destructive: #cc3333;
 }
 
+/* 🌚 Dark Theme — Based on Screenshot */
 .dark {
   --radius: 0.625rem;
 
-  /* Dark mode colors */
-  --background: #3d3236;               /* Dark background */
-  --foreground: #f2e7e5;               /* Light text */
-  --primary: #904073;                  /* Same purple */
-  --primary-foreground: #f2e7e5;
-  --secondary: #516157;
-  --secondary-foreground: #a8c7ca;
-  --accent: #904073;
-  --accent-foreground: #f2e7e5;
+  --background: #0d0f10; /* Dark slate base */
+  --foreground: var(--emerald-100);
 
-  --card: #516157;
-  --card-foreground: #f2e7e5;
-  --popover: #516157;
-  --popover-foreground: #f2e7e5;
+  --primary: var(--emerald-500);
+  --primary-foreground: black;
 
-  --border: #a8c7ca;
-  --input: #a8c7ca;
-  --ring: #904073;
+  --secondary: #1a1d1f;
+  --secondary-foreground: var(--emerald-100);
 
-  --sidebar: #3d3236;
-  --sidebar-foreground: #f2e7e5;
-  --sidebar-primary: #904073;
-  --sidebar-primary-foreground: #f2e7e5;
-  --sidebar-accent: #516157;
-  --sidebar-accent-foreground: #a8c7ca;
-  --sidebar-border: #a8c7ca;
-  --sidebar-ring: #904073;
+  --accent: var(--emerald-500);
+  --accent-foreground: black;
 
-  --chart-1: #904073;
-  --chart-2: #a8c7ca;
-  --chart-3: #516157;
-  --chart-4: #3d3236;
-  --chart-5: #904073;
+  --card: var(--emerald-600);
+  --card-foreground: white;
 
-  --destructive: #904073;
+  --popover: #1b1d1f;
+  --popover-foreground: var(--emerald-100);
+
+  --border: var(--emerald-800);
+  --input: var(--emerald-900);
+  --ring: var(--emerald-500);
+
+  --sidebar: #121415;
+  --sidebar-foreground: var(--emerald-100);
+  --sidebar-primary: var(--emerald-500);
+  --sidebar-primary-foreground: black;
+  --sidebar-accent: var(--emerald-700);
+  --sidebar-accent-foreground: var(--emerald-100);
+  --sidebar-border: var(--emerald-800);
+  --sidebar-ring: var(--emerald-500);
+
+  --chart-1: var(--emerald-400);
+  --chart-2: var(--emerald-500);
+  --chart-3: var(--emerald-200);
+  --chart-4: var(--emerald-700);
+  --chart-5: var(--emerald-100);
+
+  --destructive: #ff6b6b;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
-
