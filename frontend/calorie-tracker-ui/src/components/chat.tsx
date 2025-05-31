@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
@@ -19,12 +19,12 @@ export default function ChatPage() {
   const bottomRef = useRef<HTMLDivElement | null>(null)
   useEffect(() => {
     const fakeChatHistory: Message[] = [
-      { role: "user", content: "what should i eat for dinner?" },
-      { role: "user", content: "what should i eat for dinner asd awd awd awd awd awd asda djhaw?" },
-      { role: "user", content: "what should i eat for dinner asdjkhawjhdjahdhjawgdhjagdhjgahjdgawjhdgad?" },
-      { role: "bot", content: "to fit your macros for today, i'd suggest eating chicken and rice" },
-      { role: "user", content: "ok ill eat chicken and rice!, ajhdjwahdjkshadjkahwjkhdjashdka \n asjdghajwhgdahgwhdgashdgajwhgdjhagdhawghdjgahjgwajhgdhjawgjd ***asdawd*** ajahsd" },
-      { role: "bot", content: `## Super cool article about something \nTo make headers for the different sections \n\n of the article, type\n ### Materials \nyou'll need...` }
+      { role: "You", content: "what should i eat for dinner?" },
+      { role: "You", content: "what should i eat for dinner asd awd awd awd awd awd asda djhaw?" },
+      { role: "You", content: "what should i eat for dinner asdjkhawjhdjahdhjawgdhjagdhjgahjdgawjhdgad?" },
+      { role: "Fitness Agent", content: "to fit your macros for today, i'd suggest eating chicken and rice" },
+      { role: "You", content: "ok ill eat chicken and rice!, ajhdjwahdjkshadjkahwjkhdjashdka \n asjdghajwhgdahgwhdgashdgajwhgdjhagdhawghdjgahjgwajhgdhjawgjd ***asdawd*** ajahsd" },
+      { role: "Fitness Agent", content: `## Super cool article about something \nTo make headers for the different sections \n\n of the article, type\n ### Materials \nyou'll need...` }
     ];
     setMessages(fakeChatHistory);
   }, []);
@@ -55,17 +55,19 @@ export default function ChatPage() {
             {messages.map((msg, index) => (
               <div
                 key={index}
-                className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                className={`flex ${msg.role === "You" ? "justify-end" : "justify-start"}`}
               >
                 <div className="max-w-[80%]">
                   <Card
-                    className={`py-2 ${
-                      msg.role === "user"
-                        ? "bg-[var(--sidebar-accent)] text-[var(--sidebar-accent-foreground)]"
-                        : "bg-[var(--sidebar)] text-[var(--sidebar-foreground)]"
-                    }`}
-                  >
-                    <CardContent className="py-1 px-3 break-words whitespace-pre-wrap">
+                    className={`py-0 gap-1 border-0 !bg-transparent`}>
+                    <CardHeader className={`gap-0 -mx-1 !border-0 !shadow-none !bg-transparent italic font-semibold ${msg.role === "You" ? "justify-end" : "justify-start"}`}>{msg.role}
+                    </CardHeader>
+                   
+                    <CardContent className={` break-words whitespace-pre-wrap border rounded-lg ${
+                        msg.role === "You" 
+                        ? "justify-end bg-[var(--sidebar-accent)] text-[var(--sidebar-accent-foreground)]" 
+                        : "justify-start bg-[var(--sidebar)] text-[var(--sidebar-foreground)]"
+                    }`}>
                       <MarkdownRenderer content={msg.content} />
                     </CardContent>
                   </Card>
