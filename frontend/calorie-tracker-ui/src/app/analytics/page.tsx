@@ -1,7 +1,6 @@
-export default function Home() {
-  return (
-        <div>
-          <p>analytics page test</p>
-        </div>
-);
+
+import Chat from "@/components/analytics";
+
+export default function AnalyticsnalyticsPage() {
+  return <Analytics />;
 }
