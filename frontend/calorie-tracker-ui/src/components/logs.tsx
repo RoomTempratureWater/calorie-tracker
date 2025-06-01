@@ -27,7 +27,7 @@ export default function Logs() {
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
 
-  // NOTE: aditya -> if youre working on this, use fetchWithDebounce method to call the api while chaning this dummy api call
+  // NOTE: aditya -> if youre working on this, use fetchWithDebounce method to call the api while chaning this dummy api call.
   useEffect(() => {
     const dummyLogs: LogEntry[] = [
       {
