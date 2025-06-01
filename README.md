@@ -5,7 +5,3 @@ main page for chatting with fitness agent
 
 ![Screenshot 2025-05-31 at 14-48-00 Fitness Agent](https://github.com/user-attachments/assets/79abea13-50e7-4505-b2b5-325c7ec028ae)
 
-### phone
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/65ec7d69-5d30-4095-be87-8cd4ce17851c" width="300"/>
-</p>
