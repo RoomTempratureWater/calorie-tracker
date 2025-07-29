@@ -15,6 +15,7 @@
 <p align="center">
   <img src="https://github.com/user-attachments/assets/79abea13-50e7-4505-b2b5-325c7ec028ae" alt="project-screenshot" width="400">
 </p>
+Demo Ui screenshot, (frontend is in works)
 
 ---
 
